@@ -34,3 +34,73 @@ Clone this repo in your local and make a new branch with your name, update the r
 ###### You can always reach out to Sairam Bade or Kuldeep on slack in case of any doubt. Good Luck!
 ---------------------------------------------
 #Your readme goes here :)
+
+### Database details
+
+- Mongo server (host) : `mongo.servers.nferx.com`
+- database name : `shahid`
+- Collections : `projects`, `datasets`, `models`
+
+The reason behind having three collections is because of the kind of queries we have on our database (`get_project_related_datasets_models`, `get_info`, `get_models_trained_with_dataset` APIs related queries)
+
+#### User Credentials
+Add ur user credentials to the code before running the app. (`MONGO_USER` and `MONGO_PASSWORD`)
+Also modify port number, if necessary.
+
+### Workflow for APIs
+There are 4 APIs in total (excluding healthcheck and root page APIs)
+
+**Optional** : Examples for all the 6 APIs are given in a postman collection (`Mongo-flask-assignment.postman_collection.json`). Import this collection and test the APIs
+
+***Work flow for each API:***
+
+#### import_project API
+##### API details
+API to import project details of requested project into my database
+- Method supported : **POST**
+- Request parameters :
+  - **project_id** : ID of the project
+
+##### API Workflow
+- Make `GET` request to given service endpoint with requested `project_id`
+- Two possible cases
+  - If project information of requested `project_id` is already present then update our database if necessary (decided using last updated timestamp)
+  - Else insert these details to our collections
+
+**Note** : the `projects` collection is NOT inserted with the same information as the response received from service endpoint. The models and datasets information is removed and added to the respective collections. Only the names of models and datasets are stored in the `projects` collection.
+
+#### get_project_related_datasets_models API
+##### API details
+API to get list of datasets and models associated to a given project
+- Method supported : **GET**
+- Request parameters :
+  - **project_id** : ID of the project
+
+##### API Workflow
+- If project information of requested `project_id` is not present in our `projects` collection then make a `POST` call to `import_project` API with the same `project_id`
+- If project information is in our collection, return the response accordingly.
+
+#### get_info API
+##### API details
+API to get information of requested dataset OR model OR project
+- Method supported : **POST**
+- Request parameters :
+  - **info_of** : information of what kind of entity (projects, models or datasets)
+  - **id** : project ID for projects, dataset ID for datasets and model name for models ( as models don't have an ID in the response from service endpoint)
+
+##### API Workflow
+- For `info_of` == projects
+  - If project information of requested `project_id` is not present in our `projects` collection then make a `POST` call to `import_project` API with the same `project_id`
+  - If project information is in our collection, return the response accordingly.
+- For other `info_of` categories
+  - Query the respective collection and return the response
+
+#### get_models_trained_with_dataset API
+##### API details
+API to get list of models trained with given dataset
+- Method supported : **GET**
+- Request parameters : 
+  - **dataset_id** : ID of the dataset
+
+##### API Workflow
+- Query for the models having the requested `dataset_id` in the list of datasets used to train it

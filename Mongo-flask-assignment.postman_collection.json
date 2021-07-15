@@ -1,0 +1,222 @@
+{
+	"info": {
+		"_postman_id": "8c79a4c3-cf2f-443e-a323-c803bda9fe31",
+		"name": "Mongo-flask-assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:24537/healthcheck",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "24537",
+					"path": [
+						"healthcheck"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "import_project",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:24537/import_project?project_id=607e2bb4383fa0b9dc012ba",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "24537",
+					"path": [
+						"import_project"
+					],
+					"query": [
+						{
+							"key": "project_id",
+							"value": "5fd1e3d98ba062dffa513175",
+							"disabled": true
+						},
+						{
+							"key": "project_id",
+							"value": "5fd1ead68ba062dffa5204fc",
+							"disabled": true
+						},
+						{
+							"key": "project_id",
+							"value": "601bcdbeb8a45f4f8185185f",
+							"disabled": true
+						},
+						{
+							"key": "project_id",
+							"value": "605db7f1dd043f7dbfd6c4a1",
+							"disabled": true
+						},
+						{
+							"key": "project_id",
+							"value": "607e2bb4383fa0b9dc012ba6",
+							"disabled": true
+						},
+						{
+							"key": "project_id",
+							"value": "607e2bb4383fa0b9dc012ba",
+							"description": "invalid project id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_project_related_datasets_models",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {",
+							"    console.log(response.json());",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:24537/get_project_related_datasets_models?project_id=5fd1e3d98ba062dffa513175",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "24537",
+					"path": [
+						"get_project_related_datasets_models"
+					],
+					"query": [
+						{
+							"key": "project_id",
+							"value": "5fd1e3d98ba062dffa513175"
+						},
+						{
+							"key": "project_id",
+							"value": "5fd1ead68ba062dffa5204fc",
+							"disabled": true
+						},
+						{
+							"key": "project_id",
+							"value": "601bcdbeb8a45f4f8185185f",
+							"disabled": true
+						},
+						{
+							"key": "project_id",
+							"value": "605db7f1dd043f7dbfd6c4a1",
+							"disabled": true
+						},
+						{
+							"key": "project_id",
+							"value": "607e2bb4383fa0b9dc012ba6",
+							"disabled": true
+						},
+						{
+							"key": "project_id",
+							"value": "607e2bb4383fa0b9dc012ba",
+							"description": "invalid project_id",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:24537/get_info?info_of=models&id=Model_2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "24537",
+					"path": [
+						"get_info"
+					],
+					"query": [
+						{
+							"key": "info_of",
+							"value": "projects",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "5fd1e3d98ba062dffa513175",
+							"disabled": true
+						},
+						{
+							"key": "info_of",
+							"value": "datasets",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "5fd1e4218ba062dffa513177",
+							"disabled": true
+						},
+						{
+							"key": "info_of",
+							"value": "models"
+						},
+						{
+							"key": "id",
+							"value": "Model_2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_models_trained_with_dataset",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:24537/get_models_trained_with_dataset?dataset_id=5fd201f98ba062dffa528aa3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "24537",
+					"path": [
+						"get_models_trained_with_dataset"
+					],
+					"query": [
+						{
+							"key": "dataset_id",
+							"value": "5fd201f98ba062dffa528aa3"
+						},
+						{
+							"key": "dataset_id",
+							"value": "5fd1ecdc8ba062dffa522c77",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
